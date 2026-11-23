@@ -15,166 +15,260 @@
       --accent-2: #00d4ff;
       --border: rgba(255, 255, 255, 0.08);
       --green: #22c55e;
+      --gold: #fbbf24;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
     body { background: var(--bg); color: var(--text); line-height: 1.5; }
-    a { color: inherit; text-decoration: none; }
 
     header {
       position: sticky; top: 0; z-index: 20;
-      background: rgba(11, 13, 18, 0.9);
+      background: rgba(11, 13, 18, 0.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
-      padding: 14px 18px;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
     }
-    .brand { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.5px; }
+    .brand { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.5px; }
     .brand span { color: var(--accent); }
+    .hdr-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .wallet {
-      background: var(--card-2);
-      border: 1px solid var(--border);
-      padding: 7px 12px; border-radius: 999px;
-      font-size: 0.88rem; font-weight: 600;
+      background: var(--card-2); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
     }
     .wallet b { color: var(--green); }
 
-    .hero {
-      padding: 28px 18px 18px;
-      max-width: 1080px; margin: 0 auto;
-    }
-    .hero h1 { font-size: 1.65rem; font-weight: 800; margin-bottom: 6px; }
-    .hero p { color: var(--muted); font-size: 0.95rem; }
-
-    .tabs {
-      display: flex; gap: 8px; overflow-x: auto;
-      padding: 12px 18px; max-width: 1080px; margin: 0 auto;
-    }
-    .tab {
-      background: var(--card); color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 8px 14px; border-radius: 10px;
-      font-size: 0.88rem; font-weight: 600; white-space: nowrap; cursor: pointer;
-    }
-    .tab.active {
-      background: var(--accent); color: #fff; border-color: var(--accent);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-      padding: 8px 18px 36px;
-      max-width: 1080px; margin: 0 auto;
-    }
-    .item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
-    }
-    .badge {
-      display: inline-block; font-size: 0.75rem; font-weight: 700;
-      padding: 3px 9px; border-radius: 999px;
-      background: rgba(0, 212, 255, 0.14); color: var(--accent-2);
-      margin-bottom: 8px;
-    }
-    .item h3 { font-size: 1.05rem; margin-bottom: 4px; }
-    .item p { color: var(--muted); font-size: 0.86rem; }
-    .foot {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding-top: 10px; border-top: 1px solid var(--border);
-    }
-    .price { font-weight: 800; color: #fbbf24; font-size: 0.98rem; }
     .btn {
       background: var(--accent); color: #fff; border: none;
-      padding: 8px 14px; border-radius: 9px;
-      font-weight: 700; font-size: 0.86rem; cursor: pointer;
+      padding: 8px 13px; border-radius: 9px;
+      font-weight: 700; font-size: 0.84rem; cursor: pointer;
     }
-    .btn:hover { opacity: 0.9; }
+    .btn:hover { opacity: 0.92; }
     .btn-sub {
       background: var(--card-2); color: var(--text); border: 1px solid var(--border);
     }
+    .btn-sm { padding: 6px 10px; font-size: 0.8rem; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+    .hero { padding: 22px 0 10px; }
+    .hero h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
+    .hero p { color: var(--muted); font-size: 0.9rem; }
+
+    .nav-bar {
+      display: flex; gap: 8px; overflow-x: auto; padding: 12px 0;
+      border-bottom: 1px solid var(--border); margin-bottom: 14px;
+    }
+    .tab {
+      background: var(--card); color: var(--muted); border: 1px solid var(--border);
+      padding: 8px 13px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
+      white-space: nowrap; cursor: pointer;
+    }
+    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px; padding-bottom: 32px;
+    }
+    .item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .thumb-wrap {
+      width: 100%; height: 150px; background: var(--card-2);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb-empty { color: var(--muted); font-size: 0.82rem; padding: 10px; text-align: center; }
+
+    .item-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: space-between; }
+    .badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 999px;
+      background: rgba(0, 212, 255, 0.14); color: var(--accent-2); margin-bottom: 6px;
+    }
+    .item h3 { font-size: 1rem; margin-bottom: 4px; }
+    .item p { color: var(--muted); font-size: 0.84rem; }
+    .foot {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding-top: 10px; border-top: 1px solid var(--border);
+    }
+    .price { font-weight: 800; color: var(--gold); font-size: 0.95rem; }
+
+    .panel {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px; margin-bottom: 32px; display: none;
+    }
+    .panel.open { display: block; }
+    .history-item {
+      background: var(--card-2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px; margin-top: 10px; font-size: 0.88rem;
+      display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    }
+    .history-item small { color: var(--muted); display: block; }
+    .tag-ok { color: var(--green); font-weight: 700; }
 
     .modal-bg {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-      display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      display: none; align-items: center; justify-content: center; padding: 14px; z-index: 50;
     }
     .modal-bg.open { display: flex; }
     .modal {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px; width: 100%; max-width: 380px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 18px; width: 100%; max-width: 410px; max-height: 90vh; overflow-y: auto;
     }
-    .modal h3 { margin-bottom: 8px; }
-    .modal p { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
-    .modal input {
-      width: 100%; padding: 10px 12px; border-radius: 10px;
+    .modal h3 { margin-bottom: 6px; }
+    .modal p { color: var(--muted); font-size: 0.86rem; margin-bottom: 12px; }
+    .modal label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
+    .modal input, .modal select {
+      width: 100%; padding: 9px 11px; border-radius: 9px;
       border: 1px solid var(--border); background: var(--bg); color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 11px; font-size: 0.9rem;
     }
-    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .pay-box {
+      background: var(--card-2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px; margin-bottom: 12px; font-size: 0.84rem;
+    }
+    .pay-box img {
+      width: 160px; height: 160px; object-fit: contain; display: block;
+      margin: 8px auto; background: #fff; padding: 6px; border-radius: 8px;
+    }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
 
     footer {
-      text-align: center; color: var(--muted); font-size: 0.82rem;
-      padding: 20px 16px 32px; border-top: 1px solid var(--border);
+      text-align: center; color: var(--muted); font-size: 0.8rem;
+      padding: 18px 14px 28px; border-top: 1px solid var(--border);
     }
   </style>
 </head>
 <body>
   <header>
     <div class="brand">PHÁT <span>LV</span></div>
-    <div style="display:flex; gap:8px; align-items:center;">
+    <div class="hdr-right">
       <div class="wallet">Số dư: <b id="balanceText">0đ</b></div>
-      <button class="btn btn-sub" onclick="openTopup()">+ Nạp</button>
+      <button class="btn btn-sm" onclick="openTopup()">+ Thanh toán / Nạp</button>
+      <button class="btn btn-sub btn-sm" id="authBtn" onclick="openAuth()">Tài khoản</button>
     </div>
   </header>
 
-  <section class="hero">
-    <h1>PHÁT LV — Dịch Vụ & Acc Free Fire</h1>
-    <p>Chọn danh mục bên dưới để xem gói dịch vụ, nạp số dư mẫu hoặc đặt mua nhanh.</p>
-  </section>
+  <div class="container">
+    <section class="hero">
+      <h1>PHÁT LV — Dịch Vụ & Acc Free Fire</h1>
+      <p id="userGreeting">Chưa đăng nhập tài khoản (vẫn xem shop & lưu trên trình duyệt này).</p>
+    </section>
 
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-cat="all">Tất cả</button>
-    <button class="tab" data-cat="acc">Bán & Thuê Acc FF</button>
-    <button class="tab" data-cat="menu">Menu ADR / Telekill VIP</button>
-    <button class="tab" data-cat="file">File Android OB54</button>
-    <button class="tab" data-cat="cert">Chứng Chỉ Unban & Proxy VPN</button>
+    <div class="nav-bar">
+      <button class="tab active" data-view="shop" data-cat="all">Tất cả</button>
+      <button class="tab" data-view="shop" data-cat="acc">Bán & Thuê Acc FF</button>
+      <button class="tab" data-view="shop" data-cat="menu">Menu ADR / Telekill VIP</button>
+      <button class="tab" data-view="shop" data-cat="file">File Android OB54</button>
+      <button class="tab" data-view="shop" data-cat="cert">Chứng Chỉ Unban & Proxy VPN</button>
+      <button class="tab" data-view="history">Lịch sử thanh toán</button>
+    </div>
+
+    <main class="grid" id="productGrid"></main>
+
+    <section class="panel" id="historyPanel">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
+        <h3>Lịch sử thanh toán & mua hàng</h3>
+        <button class="btn btn-sub btn-sm" onclick="clearHistory()">Xóa lịch sử</button>
+      </div>
+      <div id="historyList"></div>
+    </section>
   </div>
 
-  <main class="grid" id="productGrid"></main>
-
-  <div class="modal-bg" id="topupModal">
+  <!-- Modal Tài khoản -->
+  <div class="modal-bg" id="authModal">
     <div class="modal">
-      <h3>Nạp tiền (Bản giao diện mẫu)</h3>
-      <p>Nhập số tiền muốn test số dư trên trình duyệt (chưa kết nối cổng thanh toán thật).</p>
-      <input type="number" id="topupInput" placeholder="VD: 50000" min="1000" step="1000" />
+      <h3 id="authTitle">Đăng nhập / Tạo tài khoản</h3>
+      <p>Lưu tài khoản trên trình duyệt hiện tại. Nếu tên tài khoản chưa có, hệ thống sẽ tạo mới.</p>
+      <label>Tên tài khoản</label>
+      <input type="text" id="authUser" placeholder="VD: phatlv_member" />
+      <label>Mật khẩu</label>
+      <input type="password" id="authPass" placeholder="Nhập mật khẩu" />
+      <div id="loggedInfo" style="display:none; margin-bottom:12px; font-size:0.86rem; color:var(--green);"></div>
       <div class="modal-actions">
-        <button class="btn btn-sub" onclick="closeTopup()">Đóng</button>
-        <button class="btn" onclick="confirmTopup()">Cộng số dư</button>
+        <button class="btn btn-sub" id="logoutBtn" style="display:none;" onclick="logoutUser()">Đăng xuất</button>
+        <button class="btn btn-sub" onclick="closeModal('authModal')">Đóng</button>
+        <button class="btn" onclick="submitAuth()">Xác nhận</button>
       </div>
     </div>
   </div>
 
-  <footer>PHÁT LV • Bản giao diện chạy trên GitHub Pages</footer>
+  <!-- Modal Thanh toán / Nạp tiền -->
+  <div class="modal-bg" id="topupModal">
+    <div class="modal">
+      <h3>Thanh toán & Nạp tiền</h3>
+      <p>Điền link ảnh mã QR của m vào biến <code>QR_IMAGE_URL</code> trong code nếu muốn hiện mã QR thật.</p>
+      <label>Hình thức thanh toán</label>
+      <select id="payMethod">
+        <option value="QR Chuyển khoản / Ví">Quét mã QR / Chuyển khoản</option>
+        <option value="Thẻ cào / Ví điện tử">Ví điện tử / Xác nhận thủ công</option>
+      </select>
+      <div class="pay-box">
+        <div>Nội dung CK: <b id="memoText">PHATLV</b></div>
+        <img id="qrPreview" src="" alt="QR Thanh toán" style="display:none;" />
+        <div id="qrNote" style="color:var(--muted); text-align:center;">Chưa gắn link ảnh QR — bạn vẫn nhập số tiền và xác nhận giao dịch để ghi vào lịch sử.</div>
+      </div>
+      <label>Số tiền (VNĐ)</label>
+      <input type="number" id="topupInput" placeholder="VD: 50000" min="1000" step="1000" />
+      <div class="modal-actions">
+        <button class="btn btn-sub" onclick="closeModal('topupModal')">Đóng</button>
+        <button class="btn" onclick="confirmTopup()">Xác nhận thanh toán</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>PHÁT LV • Lưu ý: bản chạy trên GitHub Pages lưu dữ liệu cục bộ trên trình duyệt, chưa tự động kiểm tra giao dịch ngân hàng thật.</footer>
 
   <script>
+    // Dán link ảnh QR của m vào đây nếu muốn hiển thị ảnh QR trong khung thanh toán
+    const QR_IMAGE_URL = "";
+
+    // Thêm link ảnh thật vào trường img của từng gói khi có ảnh
     const products = [
-      { id: 1, cat: "acc", badge: "Acc FF", name: "Acc FF VIP — Skin Súng & Thẻ", desc: "Thông tin rõ ràng, kiểm tra nick trước khi giao.", price: 180000 },
-      { id: 2, cat: "acc", badge: "Thuê Acc", name: "Thuê Acc FF Theo Ngày", desc: "Phù hợp leo rank, trải nghiệm đồ họa & skin.", price: 35000 },
-      { id: 3, cat: "menu", badge: "Menu VIP", name: "Menu ADR / Telekill VIP (OB54)", desc: "Cấu hình tối ưu, hỗ trợ cài đặt & hướng dẫn sử dụng.", price: 90000 },
-      { id: 4, cat: "file", badge: "Android OB54", name: "File Android OB54 — Nhẹ Tâm & Aim Drag", desc: "Hỗ trợ mượt mà trên máy Android cấu hình thấp đến cao.", price: 50000 },
-      { id: 5, cat: "cert", badge: "Chứng Chỉ & Proxy", name: "Chứng Chỉ Unban & Proxy VPN", desc: "Gói cấu hình kết nối & hỗ trợ kích hoạt nhanh.", price: 70000 }
+      { id: 1, cat: "acc", badge: "Acc FF", name: "Acc FF VIP — Skin Súng & Thẻ", desc: "Thông tin rõ ràng, kiểm tra nick trước khi giao.", price: 180000, img: "" },
+      { id: 2, cat: "acc", badge: "Thuê Acc", name: "Thuê Acc FF Theo Ngày", desc: "Phù hợp leo rank, trải nghiệm đồ họa & skin.", price: 35000, img: "" },
+      { id: 3, cat: "menu", badge: "Menu VIP", name: "Menu ADR / Telekill VIP (OB54)", desc: "Cấu hình tối ưu, hỗ trợ cài đặt & hướng dẫn sử dụng.", price: 90000, img: "" },
+      { id: 4, cat: "file", badge: "Android OB54", name: "File Android OB54 — Nhẹ Tâm & Aim Drag", desc: "Hỗ trợ mượt mà trên máy Android cấu hình thấp đến cao.", price: 50000, img: "" },
+      { id: 5, cat: "cert", badge: "Chứng Chỉ & Proxy", name: "Chứng Chỉ Unban & Proxy VPN", desc: "Gói cấu hình kết nối & hỗ trợ kích hoạt nhanh.", price: 70000, img: "" }
     ];
 
+    let users = JSON.parse(localStorage.getItem("phatlv_users") || "{}");
+    let currentUser = localStorage.getItem("phatlv_curr_user") || "";
     let balance = Number(localStorage.getItem("phatlv_bal") || 0);
+    let history = JSON.parse(localStorage.getItem("phatlv_history") || "[]");
     let currentCat = "all";
+    let currentView = "shop";
 
-    const fmt = (n) => n.toLocaleString("vi-VN") + "đ";
+    const fmt = (n) => Number(n).toLocaleString("vi-VN") + "đ";
 
-    function renderBalance() {
-      document.getElementById("balanceText").textContent = fmt(balance);
+    function saveAll() {
+      localStorage.setItem("phatlv_users", JSON.stringify(users));
+      localStorage.setItem("phatlv_curr_user", currentUser);
       localStorage.setItem("phatlv_bal", String(balance));
+      localStorage.setItem("phatlv_history", JSON.stringify(history));
+    }
+
+    function addHistory(type, title, amount) {
+      history.unshift({
+        id: Date.now(),
+        type,
+        title,
+        amount,
+        user: currentUser || "Khách",
+        time: new Date().toLocaleString("vi-VN")
+      });
+      saveAll();
+      renderHistory();
+    }
+
+    function renderUserUI() {
+      document.getElementById("balanceText").textContent = fmt(balance);
+      document.getElementById("authBtn").textContent = currentUser ? currentUser : "Tài khoản";
+      document.getElementById("userGreeting").textContent = currentUser
+        ? "Đang đăng nhập tài khoản: " + currentUser
+        : "Chưa đăng nhập tài khoản (vẫn xem shop & lưu trên trình duyệt này).";
+      document.getElementById("memoText").textContent = "PHATLV " + (currentUser || "KHACH");
     }
 
     function renderProducts() {
@@ -182,64 +276,167 @@
       const list = currentCat === "all" ? products : products.filter(p => p.cat === currentCat);
       grid.innerHTML = list.map(p => `
         <div class="item">
-          <div>
-            <span class="badge">${p.badge}</span>
-            <h3>${p.name}</h3>
-            <p>${p.desc}</p>
+          <div class="thumb-wrap">
+            ${p.img
+              ? `<img src="${p.img}" alt="${p.name}" />`
+              : `<div class="thumb-empty">Chưa gắn ảnh<br/>(Thêm link vào mục img)</div>`}
           </div>
-          <div class="foot">
-            <span class="price">${fmt(p.price)}</span>
-            <button class="btn" onclick="buyItem(${p.id})">Mua ngay</button>
+          <div class="item-body">
+            <div>
+              <span class="badge">${p.badge}</span>
+              <h3>${p.name}</h3>
+              <p>${p.desc}</p>
+            </div>
+            <div class="foot">
+              <span class="price">${fmt(p.price)}</span>
+              <button class="btn" onclick="buyItem(${p.id})">Mua ngay</button>
+            </div>
           </div>
         </div>
       `).join("");
+    }
+
+    function renderHistory() {
+      const box = document.getElementById("historyList");
+      if (!history.length) {
+        box.innerHTML = `<p style="color:var(--muted); margin-top:10px; font-size:0.88rem;">Chưa có lịch sử thanh toán hoặc mua hàng nào.</p>`;
+        return;
+      }
+      box.innerHTML = history.map(h => `
+        <div class="history-item">
+          <div>
+            <b>${h.title}</b>
+            <small>${h.type} • TK: ${h.user} • ${h.time}</small>
+          </div>
+          <div style="text-align:right;">
+            <div class="tag-ok">${h.type === "Nạp tiền" ? "+" : "-"}${fmt(h.amount)}</div>
+            <small>Đã ghi nhận</small>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function clearHistory() {
+      history = [];
+      saveAll();
+      renderHistory();
     }
 
     function buyItem(id) {
       const item = products.find(p => p.id === id);
       if (!item) return;
       if (balance < item.price) {
-        alert("Số dư chưa đủ! Bấm nút '+ Nạp' ở góc trên để nạp thử số dư.");
+        alert("Số dư chưa đủ! Bấm '+ Thanh toán / Nạp' để nạp thêm.");
         return;
       }
       balance -= item.price;
-      renderBalance();
-      alert("Đã đặt mua mẫu: " + item.name + " (" + fmt(item.price) + ")");
+      addHistory("Mua dịch vụ", item.name, item.price);
+      renderUserUI();
+      alert("Đã đặt mua: " + item.name + " (" + fmt(item.price) + ")");
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add("open"); }
+    function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+
+    function openAuth() {
+      const info = document.getElementById("loggedInfo");
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (currentUser) {
+        info.style.display = "block";
+        info.textContent = "Tài khoản hiện tại: " + currentUser;
+        logoutBtn.style.display = "inline-block";
+      } else {
+        info.style.display = "none";
+        logoutBtn.style.display = "none";
+      }
+      openModal("authModal");
+    }
+
+    function submitAuth() {
+      const u = document.getElementById("authUser").value.trim();
+      const p = document.getElementById("authPass").value;
+      if (!u || !p) {
+        alert("Nhập đầy đủ tên tài khoản và mật khẩu.");
+        return;
+      }
+      if (!users[u]) {
+        users[u] = { pass: p };
+        currentUser = u;
+        saveAll();
+        renderUserUI();
+        closeModal("authModal");
+        alert("Đã tạo tài khoản mới: " + u);
+      } else if (users[u].pass === p) {
+        currentUser = u;
+        saveAll();
+        renderUserUI();
+        closeModal("authModal");
+        alert("Đăng nhập thành công: " + u);
+      } else {
+        alert("Sai mật khẩu cho tài khoản này.");
+      }
+    }
+
+    function logoutUser() {
+      currentUser = "";
+      saveAll();
+      renderUserUI();
+      closeModal("authModal");
     }
 
     function openTopup() {
-      document.getElementById("topupModal").classList.add("open");
-      document.getElementById("topupInput").focus();
-    }
-
-    function closeTopup() {
-      document.getElementById("topupModal").classList.remove("open");
+      const img = document.getElementById("qrPreview");
+      const note = document.getElementById("qrNote");
+      if (QR_IMAGE_URL) {
+        img.src = QR_IMAGE_URL;
+        img.style.display = "block";
+        note.style.display = "none";
+      } else {
+        img.style.display = "none";
+        note.style.display = "block";
+      }
+      renderUserUI();
+      openModal("topupModal");
     }
 
     function confirmTopup() {
       const val = Number(document.getElementById("topupInput").value);
+      const method = document.getElementById("payMethod").value;
       if (!val || val <= 0) {
-        alert("Nhập số tiền lớn hơn 0 nhé.");
+        alert("Nhập số tiền lớn hơn 0.");
         return;
       }
       balance += val;
-      renderBalance();
+      addHistory("Nạp tiền", "Thanh toán qua " + method, val);
       document.getElementById("topupInput").value = "";
-      closeTopup();
+      renderUserUI();
+      closeModal("topupModal");
     }
 
     document.querySelectorAll(".tab").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
         btn.classList.add("active");
-        currentCat = btn.dataset.cat;
-        renderProducts();
+        currentView = btn.dataset.view;
+        const grid = document.getElementById("productGrid");
+        const panel = document.getElementById("historyPanel");
+        if (currentView === "history") {
+          grid.style.display = "none";
+          panel.classList.add("open");
+          renderHistory();
+        } else {
+          panel.classList.remove("open");
+          grid.style.display = "grid";
+          currentCat = btn.dataset.cat;
+          renderProducts();
+        }
       });
     });
 
-    renderBalance();
+    renderUserUI();
     renderProducts();
+    renderHistory();
   </script>
 </body>
-  </html>
-  
+                                          </html>
+        
