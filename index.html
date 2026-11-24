@@ -1,449 +1,220 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PHÁT LV — Shop Dịch Vụ & Acc FF</title>
-  <style>
-    :root {
-      --bg: #0b0d12;
-      --card: #131722;
-      --card-2: #191f2e;
-      --text: #f3f5f8;
-      --muted: #9aa3b2;
-      --accent: #ff4655;
-      --accent-2: #00d4ff;
-      --border: rgba(255, 255, 255, 0.08);
-      --green: #22c55e;
-      --gold: #fbbf24;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: var(--bg); color: var(--text); line-height: 1.5; }
-
-    header {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(11, 13, 18, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
-      display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-    }
-    .brand { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.5px; }
-    .brand span { color: var(--accent); }
-    .hdr-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .wallet {
-      background: var(--card-2); border: 1px solid var(--border);
-      padding: 6px 12px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
-    }
-    .wallet b { color: var(--green); }
-
-    .btn {
-      background: var(--accent); color: #fff; border: none;
-      padding: 8px 13px; border-radius: 9px;
-      font-weight: 700; font-size: 0.84rem; cursor: pointer;
-    }
-    .btn:hover { opacity: 0.92; }
-    .btn-sub {
-      background: var(--card-2); color: var(--text); border: 1px solid var(--border);
-    }
-    .btn-sm { padding: 6px 10px; font-size: 0.8rem; }
-
-    .container { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
-    .hero { padding: 22px 0 10px; }
-    .hero h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
-    .hero p { color: var(--muted); font-size: 0.9rem; }
-
-    .nav-bar {
-      display: flex; gap: 8px; overflow-x: auto; padding: 12px 0;
-      border-bottom: 1px solid var(--border); margin-bottom: 14px;
-    }
-    .tab {
-      background: var(--card); color: var(--muted); border: 1px solid var(--border);
-      padding: 8px 13px; border-radius: 10px; font-size: 0.85rem; font-weight: 600;
-      white-space: nowrap; cursor: pointer;
-    }
-    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    .grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px; padding-bottom: 32px;
-    }
-    .item {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      overflow: hidden; display: flex; flex-direction: column; justify-content: space-between;
-    }
-    .thumb-wrap {
-      width: 100%; height: 150px; background: var(--card-2);
-      display: flex; align-items: center; justify-content: center; overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
-    .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .thumb-empty { color: var(--muted); font-size: 0.82rem; padding: 10px; text-align: center; }
-
-    .item-body { padding: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: space-between; }
-    .badge {
-      display: inline-block; font-size: 0.72rem; font-weight: 700;
-      padding: 3px 8px; border-radius: 999px;
-      background: rgba(0, 212, 255, 0.14); color: var(--accent-2); margin-bottom: 6px;
-    }
-    .item h3 { font-size: 1rem; margin-bottom: 4px; }
-    .item p { color: var(--muted); font-size: 0.84rem; }
-    .foot {
-      display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      padding-top: 10px; border-top: 1px solid var(--border);
-    }
-    .price { font-weight: 800; color: var(--gold); font-size: 0.95rem; }
-
-    .panel {
-      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-      padding: 16px; margin-bottom: 32px; display: none;
-    }
-    .panel.open { display: block; }
-    .history-item {
-      background: var(--card-2); border: 1px solid var(--border); border-radius: 10px;
-      padding: 12px; margin-top: 10px; font-size: 0.88rem;
-      display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
-    }
-    .history-item small { color: var(--muted); display: block; }
-    .tag-ok { color: var(--green); font-weight: 700; }
-
-    .modal-bg {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-      display: none; align-items: center; justify-content: center; padding: 14px; z-index: 50;
-    }
-    .modal-bg.open { display: flex; }
-    .modal {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-      padding: 18px; width: 100%; max-width: 410px; max-height: 90vh; overflow-y: auto;
-    }
-    .modal h3 { margin-bottom: 6px; }
-    .modal p { color: var(--muted); font-size: 0.86rem; margin-bottom: 12px; }
-    .modal label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
-    .modal input, .modal select {
-      width: 100%; padding: 9px 11px; border-radius: 9px;
-      border: 1px solid var(--border); background: var(--bg); color: var(--text);
-      margin-bottom: 11px; font-size: 0.9rem;
-    }
-    .pay-box {
-      background: var(--card-2); border: 1px solid var(--border); border-radius: 12px;
-      padding: 12px; margin-bottom: 12px; font-size: 0.84rem;
-    }
-    .pay-box img {
-      width: 160px; height: 160px; object-fit: contain; display: block;
-      margin: 8px auto; background: #fff; padding: 6px; border-radius: 8px;
-    }
-    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
-
-    footer {
-      text-align: center; color: var(--muted); font-size: 0.8rem;
-      padding: 18px 14px 28px; border-top: 1px solid var(--border);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHÁT LV — Shop</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#0b0d12;--card:#131722;--card2:#191f2e;--text:#f3f5f8;--muted:#9aa3b2;--red:#ff4655;--green:#22c55e;--gold:#fbbf24;--line:#ffffff14}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui,sans-serif;line-height:1.5}
+header{position:sticky;top:0;z-index:5;background:#0b0d12ed;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:20px;font-weight:900}.brand span{color:var(--red)}.right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.wallet,.pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-weight:700}.wallet b{color:var(--green)}
+button{border:0;border-radius:9px;padding:9px 13px;background:var(--red);color:white;font-weight:750;cursor:pointer}button.secondary{background:var(--card2);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:not-allowed}
+.wrap{max-width:1100px;margin:auto;padding:18px 16px}.hero{padding:8px 0 18px}.hero h1{margin:0 0 5px;font-size:26px}.muted,small{color:var(--muted)}
+nav{display:flex;gap:8px;overflow:auto;padding:0 0 14px;border-bottom:1px solid var(--line);margin-bottom:16px}
+nav button{white-space:nowrap;background:var(--card);border:1px solid var(--line);color:var(--muted)}nav button.active{background:var(--red);color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:14px}
+.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px}
+.card{display:flex;flex-direction:column;gap:9px}.card h3{margin:0}.price{color:var(--gold);font-weight:900}.card .bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
+.badge{color:#50c8ff;background:#00d4ff18;border-radius:30px;padding:3px 8px;font-size:12px;display:inline-block;width:max-content}
+.panel{margin-top:15px}.hidden{display:none!important}
+input,select,textarea{width:100%;padding:10px;margin:5px 0 12px;border-radius:9px;border:1px solid var(--line);background:#090c12;color:var(--text)}
+label{font-size:13px;color:var(--muted)}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.itemrow{padding:12px;background:var(--card2);border:1px solid var(--line);border-radius:10px;margin-top:9px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.qr{width:min(230px,100%);display:block;margin:10px auto;background:white;border-radius:10px;padding:5px}
+.status{font-weight:800}.pending{color:var(--gold)}.ok{color:var(--green)}.bad{color:#fb7185}
+footer{text-align:center;color:var(--muted);padding:24px 12px;border-top:1px solid var(--line);margin-top:28px;font-size:13px}
+#notice{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:#202838;border:1px solid var(--line);padding:10px 15px;border-radius:10px;display:none;z-index:20;max-width:90%;box-shadow:0 8px 30px #0008}
+@media(max-width:560px){.hero h1{font-size:22px}header{align-items:flex-start}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="brand">PHÁT <span>LV</span></div>
-    <div class="hdr-right">
-      <div class="wallet">Số dư: <b id="balanceText">0đ</b></div>
-      <button class="btn btn-sm" onclick="openTopup()">+ Thanh toán / Nạp</button>
-      <button class="btn btn-sub btn-sm" id="authBtn" onclick="openAuth()">Tài khoản</button>
-    </div>
-  </header>
-
-  <div class="container">
-    <section class="hero">
-      <h1>PHÁT LV — Dịch Vụ & Acc Free Fire</h1>
-      <p id="userGreeting">Chưa đăng nhập tài khoản (vẫn xem shop & lưu trên trình duyệt này).</p>
-    </section>
-
-    <div class="nav-bar">
-      <button class="tab active" data-view="shop" data-cat="all">Tất cả</button>
-      <button class="tab" data-view="shop" data-cat="acc">Bán & Thuê Acc FF</button>
-      <button class="tab" data-view="shop" data-cat="menu">Menu ADR / Telekill VIP</button>
-      <button class="tab" data-view="shop" data-cat="file">File Android OB54</button>
-      <button class="tab" data-view="shop" data-cat="cert">Chứng Chỉ Unban & Proxy VPN</button>
-      <button class="tab" data-view="history">Lịch sử thanh toán</button>
-    </div>
-
-    <main class="grid" id="productGrid"></main>
-
-    <section class="panel" id="historyPanel">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap;">
-        <h3>Lịch sử thanh toán & mua hàng</h3>
-        <button class="btn btn-sub btn-sm" onclick="clearHistory()">Xóa lịch sử</button>
-      </div>
-      <div id="historyList"></div>
-    </section>
+<header>
+  <div class="brand">PHÁT <span>LV</span></div>
+  <div class="right">
+    <div class="wallet">Ví: <b id="balance">0đ</b></div>
+    <button onclick="showView('topup')">+ Nạp tiền</button>
+    <button class="secondary" id="accountBtn" onclick="showView('account')">Tài khoản</button>
   </div>
+</header>
+<div class="wrap">
+  <section class="hero">
+    <h1>PHÁT LV — Shop dịch vụ game</h1>
+    <div class="muted" id="welcome">Đăng nhập để lưu đơn hàng và số dư trên tài khoản.</div>
+  </section>
+  <nav>
+    <button class="active" data-view="shop" onclick="showView('shop')">Cửa hàng</button>
+    <button data-view="history" onclick="showView('history')">Đơn hàng</button>
+    <button data-view="topup" onclick="showView('topup')">Nạp tiền</button>
+    <button data-view="account" onclick="showView('account')">Tài khoản</button>
+    <button data-view="admin" id="adminTab" class="hidden" onclick="showView('admin')">Quản trị</button>
+  </nav>
 
-  <!-- Modal Tài khoản -->
-  <div class="modal-bg" id="authModal">
-    <div class="modal">
-      <h3 id="authTitle">Đăng nhập / Tạo tài khoản</h3>
-      <p>Lưu tài khoản trên trình duyệt hiện tại. Nếu tên tài khoản chưa có, hệ thống sẽ tạo mới.</p>
-      <label>Tên tài khoản</label>
-      <input type="text" id="authUser" placeholder="VD: phatlv_member" />
-      <label>Mật khẩu</label>
-      <input type="password" id="authPass" placeholder="Nhập mật khẩu" />
-      <div id="loggedInfo" style="display:none; margin-bottom:12px; font-size:0.86rem; color:var(--green);"></div>
-      <div class="modal-actions">
-        <button class="btn btn-sub" id="logoutBtn" style="display:none;" onclick="logoutUser()">Đăng xuất</button>
-        <button class="btn btn-sub" onclick="closeModal('authModal')">Đóng</button>
-        <button class="btn" onclick="submitAuth()">Xác nhận</button>
-      </div>
+  <section id="shopView">
+    <div class="muted" style="margin-bottom:12px">Sản phẩm và dịch vụ hợp lệ được quản lý trong trang Admin.</div>
+    <div class="grid" id="products"><div class="panel">Đang tải sản phẩm...</div></div>
+  </section>
+
+  <section id="topupView" class="panel hidden">
+    <h2>Nạp tiền qua ZaloPay</h2>
+    <p class="muted">Quét QR bên dưới. Mỗi yêu cầu có mã riêng; số dư chỉ được cộng sau khi Admin xác minh khoản tiền đã nhận.</p>
+    <img class="qr" src="zalopay-qr.webp" alt="QR nhận tiền ZaloPay">
+    <div class="muted" style="text-align:center">Tên hiển thị trên QR: KIM PHAT</div>
+    <label>Số tiền muốn nạp (VNĐ)</label><input id="topupAmount" type="number" min="1000" step="1000" placeholder="Ví dụ: 20000">
+    <div class="actions"><button onclick="createTopup()">Tạo yêu cầu nạp</button></div>
+    <div id="topupResult" class="muted" style="margin-top:10px"></div>
+    <p class="muted" style="font-size:13px;margin-top:12px">Không nhập thông tin đăng nhập/OTP ZaloPay vào website. QR cá nhân không tự xác minh giao dịch.</p>
+  </section>
+
+  <section id="accountView" class="panel hidden">
+    <h2>Tài khoản</h2>
+    <div id="signedOut">
+      <label>Email</label><input id="email" type="email" autocomplete="email" placeholder="Email của mày">
+      <label>Mật khẩu</label><input id="password" type="password" autocomplete="current-password" placeholder="Ít nhất 6 ký tự">
+      <div class="actions"><button onclick="signIn()">Đăng nhập</button><button class="secondary" onclick="signUp()">Tạo tài khoản</button></div>
     </div>
-  </div>
-
-  <!-- Modal Thanh toán / Nạp tiền -->
-  <div class="modal-bg" id="topupModal">
-    <div class="modal">
-      <h3>Thanh toán & Nạp tiền</h3>
-      <p>Điền link ảnh mã QR của m vào biến <code>QR_IMAGE_URL</code> trong code nếu muốn hiện mã QR thật.</p>
-      <label>Hình thức thanh toán</label>
-      <select id="payMethod">
-        <option value="QR Chuyển khoản / Ví">Quét mã QR / Chuyển khoản</option>
-        <option value="Thẻ cào / Ví điện tử">Ví điện tử / Xác nhận thủ công</option>
-      </select>
-      <div class="pay-box">
-        <div>Nội dung CK: <b id="memoText">PHATLV</b></div>
-        <img id="qrPreview" src="" alt="QR Thanh toán" style="display:none;" />
-        <div id="qrNote" style="color:var(--muted); text-align:center;">Chưa gắn link ảnh QR — bạn vẫn nhập số tiền và xác nhận giao dịch để ghi vào lịch sử.</div>
-      </div>
-      <label>Số tiền (VNĐ)</label>
-      <input type="number" id="topupInput" placeholder="VD: 50000" min="1000" step="1000" />
-      <div class="modal-actions">
-        <button class="btn btn-sub" onclick="closeModal('topupModal')">Đóng</button>
-        <button class="btn" onclick="confirmTopup()">Xác nhận thanh toán</button>
-      </div>
+    <div id="signedIn" class="hidden">
+      <p id="userEmail"></p><div class="actions"><button class="secondary" onclick="signOut()">Đăng xuất</button></div>
     </div>
-  </div>
+  </section>
 
-  <footer>PHÁT LV • Lưu ý: bản chạy trên GitHub Pages lưu dữ liệu cục bộ trên trình duyệt, chưa tự động kiểm tra giao dịch ngân hàng thật.</footer>
+  <section id="historyView" class="panel hidden">
+    <h2>Đơn hàng & lịch sử nạp</h2><div id="historyList" class="muted">Đăng nhập để xem lịch sử.</div>
+  </section>
 
-  <script>
-    // Dán link ảnh QR của m vào đây nếu muốn hiển thị ảnh QR trong khung thanh toán
-    const QR_IMAGE_URL = "";
-
-    // Thêm link ảnh thật vào trường img của từng gói khi có ảnh
-    const products = [
-      { id: 1, cat: "acc", badge: "Acc FF", name: "Acc FF VIP — Skin Súng & Thẻ", desc: "Thông tin rõ ràng, kiểm tra nick trước khi giao.", price: 180000, img: "" },
-      { id: 2, cat: "acc", badge: "Thuê Acc", name: "Thuê Acc FF Theo Ngày", desc: "Phù hợp leo rank, trải nghiệm đồ họa & skin.", price: 35000, img: "" },
-      { id: 3, cat: "menu", badge: "Menu VIP", name: "Menu ADR / Telekill VIP (OB54)", desc: "Cấu hình tối ưu, hỗ trợ cài đặt & hướng dẫn sử dụng.", price: 90000, img: "" },
-      { id: 4, cat: "file", badge: "Android OB54", name: "File Android OB54 — Nhẹ Tâm & Aim Drag", desc: "Hỗ trợ mượt mà trên máy Android cấu hình thấp đến cao.", price: 50000, img: "" },
-      { id: 5, cat: "cert", badge: "Chứng Chỉ & Proxy", name: "Chứng Chỉ Unban & Proxy VPN", desc: "Gói cấu hình kết nối & hỗ trợ kích hoạt nhanh.", price: 70000, img: "" }
-    ];
-
-    let users = JSON.parse(localStorage.getItem("phatlv_users") || "{}");
-    let currentUser = localStorage.getItem("phatlv_curr_user") || "";
-    let balance = Number(localStorage.getItem("phatlv_bal") || 0);
-    let history = JSON.parse(localStorage.getItem("phatlv_history") || "[]");
-    let currentCat = "all";
-    let currentView = "shop";
-
-    const fmt = (n) => Number(n).toLocaleString("vi-VN") + "đ";
-
-    function saveAll() {
-      localStorage.setItem("phatlv_users", JSON.stringify(users));
-      localStorage.setItem("phatlv_curr_user", currentUser);
-      localStorage.setItem("phatlv_bal", String(balance));
-      localStorage.setItem("phatlv_history", JSON.stringify(history));
-    }
-
-    function addHistory(type, title, amount) {
-      history.unshift({
-        id: Date.now(),
-        type,
-        title,
-        amount,
-        user: currentUser || "Khách",
-        time: new Date().toLocaleString("vi-VN")
-      });
-      saveAll();
-      renderHistory();
-    }
-
-    function renderUserUI() {
-      document.getElementById("balanceText").textContent = fmt(balance);
-      document.getElementById("authBtn").textContent = currentUser ? currentUser : "Tài khoản";
-      document.getElementById("userGreeting").textContent = currentUser
-        ? "Đang đăng nhập tài khoản: " + currentUser
-        : "Chưa đăng nhập tài khoản (vẫn xem shop & lưu trên trình duyệt này).";
-      document.getElementById("memoText").textContent = "PHATLV " + (currentUser || "KHACH");
-    }
-
-    function renderProducts() {
-      const grid = document.getElementById("productGrid");
-      const list = currentCat === "all" ? products : products.filter(p => p.cat === currentCat);
-      grid.innerHTML = list.map(p => `
-        <div class="item">
-          <div class="thumb-wrap">
-            ${p.img
-              ? `<img src="${p.img}" alt="${p.name}" />`
-              : `<div class="thumb-empty">Chưa gắn ảnh<br/>(Thêm link vào mục img)</div>`}
-          </div>
-          <div class="item-body">
-            <div>
-              <span class="badge">${p.badge}</span>
-              <h3>${p.name}</h3>
-              <p>${p.desc}</p>
-            </div>
-            <div class="foot">
-              <span class="price">${fmt(p.price)}</span>
-              <button class="btn" onclick="buyItem(${p.id})">Mua ngay</button>
-            </div>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function renderHistory() {
-      const box = document.getElementById("historyList");
-      if (!history.length) {
-        box.innerHTML = `<p style="color:var(--muted); margin-top:10px; font-size:0.88rem;">Chưa có lịch sử thanh toán hoặc mua hàng nào.</p>`;
-        return;
-      }
-      box.innerHTML = history.map(h => `
-        <div class="history-item">
-          <div>
-            <b>${h.title}</b>
-            <small>${h.type} • TK: ${h.user} • ${h.time}</small>
-          </div>
-          <div style="text-align:right;">
-            <div class="tag-ok">${h.type === "Nạp tiền" ? "+" : "-"}${fmt(h.amount)}</div>
-            <small>Đã ghi nhận</small>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function clearHistory() {
-      history = [];
-      saveAll();
-      renderHistory();
-    }
-
-    function buyItem(id) {
-      const item = products.find(p => p.id === id);
-      if (!item) return;
-      if (balance < item.price) {
-        alert("Số dư chưa đủ! Bấm '+ Thanh toán / Nạp' để nạp thêm.");
-        return;
-      }
-      balance -= item.price;
-      addHistory("Mua dịch vụ", item.name, item.price);
-      renderUserUI();
-      alert("Đã đặt mua: " + item.name + " (" + fmt(item.price) + ")");
-    }
-
-    function openModal(id) { document.getElementById(id).classList.add("open"); }
-    function closeModal(id) { document.getElementById(id).classList.remove("open"); }
-
-    function openAuth() {
-      const info = document.getElementById("loggedInfo");
-      const logoutBtn = document.getElementById("logoutBtn");
-      if (currentUser) {
-        info.style.display = "block";
-        info.textContent = "Tài khoản hiện tại: " + currentUser;
-        logoutBtn.style.display = "inline-block";
-      } else {
-        info.style.display = "none";
-        logoutBtn.style.display = "none";
-      }
-      openModal("authModal");
-    }
-
-    function submitAuth() {
-      const u = document.getElementById("authUser").value.trim();
-      const p = document.getElementById("authPass").value;
-      if (!u || !p) {
-        alert("Nhập đầy đủ tên tài khoản và mật khẩu.");
-        return;
-      }
-      if (!users[u]) {
-        users[u] = { pass: p };
-        currentUser = u;
-        saveAll();
-        renderUserUI();
-        closeModal("authModal");
-        alert("Đã tạo tài khoản mới: " + u);
-      } else if (users[u].pass === p) {
-        currentUser = u;
-        saveAll();
-        renderUserUI();
-        closeModal("authModal");
-        alert("Đăng nhập thành công: " + u);
-      } else {
-        alert("Sai mật khẩu cho tài khoản này.");
-      }
-    }
-
-    function logoutUser() {
-      currentUser = "";
-      saveAll();
-      renderUserUI();
-      closeModal("authModal");
-    }
-
-    function openTopup() {
-      const img = document.getElementById("qrPreview");
-      const note = document.getElementById("qrNote");
-      if (QR_IMAGE_URL) {
-        img.src = QR_IMAGE_URL;
-        img.style.display = "block";
-        note.style.display = "none";
-      } else {
-        img.style.display = "none";
-        note.style.display = "block";
-      }
-      renderUserUI();
-      openModal("topupModal");
-    }
-
-    function confirmTopup() {
-      const val = Number(document.getElementById("topupInput").value);
-      const method = document.getElementById("payMethod").value;
-      if (!val || val <= 0) {
-        alert("Nhập số tiền lớn hơn 0.");
-        return;
-      }
-      balance += val;
-      addHistory("Nạp tiền", "Thanh toán qua " + method, val);
-      document.getElementById("topupInput").value = "";
-      renderUserUI();
-      closeModal("topupModal");
-    }
-
-    document.querySelectorAll(".tab").forEach(btn => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        btn.classList.add("active");
-        currentView = btn.dataset.view;
-        const grid = document.getElementById("productGrid");
-        const panel = document.getElementById("historyPanel");
-        if (currentView === "history") {
-          grid.style.display = "none";
-          panel.classList.add("open");
-          renderHistory();
-        } else {
-          panel.classList.remove("open");
-          grid.style.display = "grid";
-          currentCat = btn.dataset.cat;
-          renderProducts();
-        }
-      });
-    });
-
-    renderUserUI();
-    renderProducts();
-    renderHistory();
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <section id="adminView" class="panel hidden">
+    <h2>Quản trị PHÁT LV</h2>
+    <p class="muted">Chỉ tài khoản được cấp role admin trong Supabase mới truy cập được dữ liệu quản trị.</p>
+    <h3>Thêm sản phẩm</h3>
+    <div class="row">
+      <div><label>Tên sản phẩm</label><input id="pName" placeholder="Tên sản phẩm"></div>
+      <div><label>Danh mục</label><input id="pCategory" placeholder="Ví dụ: Dịch vụ"></div>
+      <div><label>Giá (VNĐ)</label><input id="pPrice" type="number" min="1000" placeholder="50000"></div>
+    </div>
+    <label>Mô tả</label><textarea id="pDesc" rows="2" placeholder="Mô tả sản phẩm/dịch vụ"></textarea>
+    <button onclick="addProduct()">Thêm sản phẩm</button>
+    <h3 style="margin-top:22px">Sản phẩm hiện có</h3><div id="adminProducts"></div>
+    <h3 style="margin-top:22px">Yêu cầu nạp tiền</h3><div id="adminTopups"></div>
+    <h3 style="margin-top:22px">Đơn hàng</h3><div id="adminOrders"></div>
+  </section>
+</div>
+<footer>PHÁT LV • QR ZaloPay cá nhân • Giao dịch chỉ được ghi có sau khi xác minh thực tế.</footer>
+<div id="notice"></div>
 <script>
-  const sb = supabase.createClient(
-    "https://wqiifkhbhkaddhuvxzsi.supabase.co",
-    "sb_publishable_vRg4guFZqiLiUvxK9GEyPw_Rkediafg"
-  );
+const SUPABASE_URL = "https://wqiifkhbhkaddhuvxzsi.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_vRg4guFZqiLiUvxK9GEyPw_Rkediafg";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let user = null, profile = null, products = [];
+
+const $ = id => document.getElementById(id);
+const money = n => Number(n || 0).toLocaleString("vi-VN") + "đ";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function notify(msg){$("notice").textContent=msg;$("notice").style.display="block";setTimeout(()=>$("notice").style.display="none",3200)}
+function showView(name){
+  ["shop","topup","account","history","admin"].forEach(v=>$(v+"View").classList.toggle("hidden",v!==name));
+  document.querySelectorAll("nav button[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===name));
+  if(name==="history")loadHistory();
+  if(name==="admin")loadAdmin();
+}
+async function refreshSession(){
+  const {data:{session}}=await db.auth.getSession(); user=session?.user||null;
+  if(user){await loadProfile()} else {profile=null}
+  renderAccount(); await loadProducts();
+}
+async function loadProfile(){
+  const {data,error}=await db.from("profiles").select("id,email,balance,role").eq("id",user.id).single();
+  if(error){notify("Chưa đọc được hồ sơ. Hãy chạy file schema.sql trong Supabase.");profile=null;return}
+  profile=data;
+  $("balance").textContent=money(profile.balance);
+  $("adminTab").classList.toggle("hidden",profile.role!=="admin");
+}
+function renderAccount(){
+  $("signedOut").classList.toggle("hidden",!!user);
+  $("signedIn").classList.toggle("hidden",!user);
+  $("accountBtn").textContent=user?(user.email.split("@")[0]):"Tài khoản";
+  $("welcome").textContent=user?("Đang đăng nhập: "+user.email):"Đăng nhập để lưu đơn hàng và số dư trên tài khoản.";
+  $("userEmail").textContent=user?.email||"";
+  if(!user){$("balance").textContent="0đ";$("adminTab").classList.add("hidden")}
+}
+async function signUp(){
+  const email=$("email").value.trim(),password=$("password").value;
+  if(!email||password.length<6)return notify("Nhập email và mật khẩu ít nhất 6 ký tự.");
+  const {error}=await db.auth.signUp({email,password});
+  if(error)return notify(error.message);
+  notify("Đã gửi yêu cầu tạo tài khoản. Kiểm tra email xác nhận nếu Supabase yêu cầu.");
+}
+async function signIn(){
+  const {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+  if(error)return notify(error.message);
+  user=data.user;await loadProfile();renderAccount();showView("shop");notify("Đăng nhập thành công.");
+}
+async function signOut(){await db.auth.signOut();user=null;profile=null;renderAccount();showView("shop");notify("Đã đăng xuất.")}
+async function loadProducts(){
+  const {data,error}=await db.from("products").select("id,name,category,description,price,active").eq("active",true).order("created_at",{ascending:false});
+  if(error){$("products").innerHTML='<div class="panel">Không tải được sản phẩm. Kiểm tra schema.sql trong Supabase.</div>';return}
+  products=data||[];
+  $("products").innerHTML=products.length?products.map(p=>`<article class="card"><span class="badge">${esc(p.category||"Sản phẩm")}</span><h3>${esc(p.name)}</h3><div class="muted">${esc(p.description||"")}</div><div class="bottom"><span class="price">${money(p.price)}</span><button onclick="buyProduct('${p.id}')">Đặt mua</button></div></article>`).join(""):'<div class="panel">Shop chưa có sản phẩm. Admin có thể thêm sản phẩm trong mục Quản trị.</div>';
+}
+async function createTopup(){
+  if(!user)return notify("Đăng nhập trước khi tạo yêu cầu nạp.");
+  const amount=Number($("topupAmount").value);
+  if(!Number.isSafeInteger(amount)||amount<1000)return notify("Số tiền tối thiểu là 1.000đ.");
+  const ref="PLV"+Date.now().toString(36).toUpperCase();
+  const {error}=await db.from("topup_requests").insert({user_id:user.id,amount,reference:ref,status:"pending"});
+  if(error)return notify(error.message);
+  $("topupResult").innerHTML=`Mã nạp của mày: <b>${esc(ref)}</b><br>Chuyển đúng ${money(amount)} và ghi nội dung: <b>${esc(ref)}</b>. Chờ Admin xác minh.`;
+  $("topupAmount").value="";notify("Đã tạo yêu cầu nạp, chưa cộng số dư.");
+}
+async function buyProduct(id){
+  if(!user)return notify("Đăng nhập trước khi đặt mua.");
+  const {data,error}=await db.rpc("purchase_product",{p_product_id:id});
+  if(error)return notify(error.message);
+  await loadProfile();await loadHistory();notify("Đặt hàng thành công.");
+}
+async function loadHistory(){
+  if(!user){$("historyList").textContent="Đăng nhập để xem lịch sử.";return}
+  const [{data:orders,error:e1},{data:topups,error:e2}]=await Promise.all([
+    db.from("orders").select("id,product_name,amount,status,created_at").eq("user_id",user.id).order("created_at",{ascending:false}),
+    db.from("topup_requests").select("id,reference,amount,status,created_at").eq("user_id",user.id).order("created_at",{ascending:false})
+  ]);
+  if(e1||e2){$("historyList").textContent="Không tải được lịch sử.";return}
+  const rows=[...(orders||[]).map(x=>({title:"Đơn: "+x.product_name,amount:x.amount,status:x.status,time:x.created_at,kind:"Mua hàng"})),...(topups||[]).map(x=>({title:"Nạp: "+x.reference,amount:x.amount,status:x.status,time:x.created_at,kind:"Nạp tiền"}))].sort((a,b)=>new Date(b.time)-new Date(a.time));
+  $("historyList").innerHTML=rows.length?rows.map(x=>`<div class="itemrow"><div><b>${esc(x.title)}</b><small>${esc(x.kind)} • ${new Date(x.time).toLocaleString("vi-VN")}</small></div><div><b>${money(x.amount)}</b><br><span class="status ${x.status==="approved"||x.status==="completed"?"ok":"pending"}">${esc(x.status)}</span></div></div>`).join(""):"Chưa có giao dịch.";
+}
+async function loadAdmin(){
+  if(!user||profile?.role!=="admin"){notify("Tài khoản này không có quyền Admin.");showView("shop");return}
+  const [{data:ps},{data:ts},{data:os}]=await Promise.all([
+    db.from("products").select("*").order("created_at",{ascending:false}),
+    db.from("topup_requests").select("id,user_id,amount,reference,status,created_at").order("created_at",{ascending:false}),
+    db.from("orders").select("id,user_id,product_name,amount,status,created_at").order("created_at",{ascending:false})
+  ]);
+  $("adminProducts").innerHTML=(ps||[]).map(p=>`<div class="itemrow"><div><b>${esc(p.name)}</b><small>${money(p.price)} • ${esc(p.category)}</small></div><button class="secondary" onclick="toggleProduct('${p.id}',${!p.active})">${p.active?"Ẩn":"Hiện"}</button></div>`).join("")||"Chưa có sản phẩm.";
+  $("adminTopups").innerHTML=(ts||[]).map(t=>`<div class="itemrow"><div><b>${esc(t.reference)}</b><small>${money(t.amount)} • User: ${esc(t.user_id)} • ${esc(t.status)}</small></div>${t.status==="pending"?`<button onclick="approveTopup('${t.id}')">Đã nhận tiền — cộng ví</button>`:""}</div>`).join("")||"Chưa có yêu cầu nạp.";
+  $("adminOrders").innerHTML=(os||[]).map(o=>`<div class="itemrow"><div><b>${esc(o.product_name)}</b><small>${money(o.amount)} • ${esc(o.status)} • User: ${esc(o.user_id)}</small></div></div>`).join("")||"Chưa có đơn hàng.";
+}
+async function addProduct(){
+  const name=$("pName").value.trim(),category=$("pCategory").value.trim(),price=Number($("pPrice").value),description=$("pDesc").value.trim();
+  if(!name||!Number.isSafeInteger(price)||price<1000)return notify("Nhập tên và giá hợp lệ (từ 1.000đ).");
+  const {error}=await db.from("products").insert({name,category,price,description,active:true});
+  if(error)return notify(error.message);
+  ["pName","pCategory","pPrice","pDesc"].forEach(id=>$(id).value="");
+  await loadProducts();await loadAdmin();notify("Đã thêm sản phẩm.");
+}
+async function toggleProduct(id,active){
+  const {error}=await db.from("products").update({active}).eq("id",id);
+  if(error)return notify(error.message);
+  await loadProducts();await loadAdmin();
+}
+async function approveTopup(id){
+  if(!confirm("Chỉ xác nhận nếu đã kiểm tra tiền thực sự vào tài khoản. Tiếp tục?"))return;
+  const {error}=await db.rpc("admin_approve_topup",{p_request_id:id});
+  if(error)return notify(error.message);
+  await loadAdmin();await loadProfile();notify("Đã duyệt yêu cầu nạp.");
+}
+db.auth.onAuthStateChange(()=>setTimeout(refreshSession,0));
+refreshSession();
 </script>
-  </script>
 </body>
-        </html>
-  
+</html>
